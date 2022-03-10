@@ -30,7 +30,7 @@ def get_version():
 
 
 def write_version_python_file(version):
-    version_python_file = os.path.join(current_file_path, "paxLib", "version.py")
+    version_python_file = os.path.join(current_file_path, "paxLibUL", "version.py")
     with open(version_python_file, "w", encoding="utf-8") as f:
         f.write(f"__version__ = {repr(version)}\n")
 
@@ -44,9 +44,9 @@ def main():
 
     packages = find_packages()
     setup(
-        name="paxLib",
+        name="paxLibUL",
         version=version,
-        author="PaX-ul",
+        author="PaX-UL",
         url="https://pax.ulaval.ca/",
         download_url="https://github.com/PAX-ULaval/pax-libraries/archive/v" + version + ".zip",
         license="LGPLv3",
