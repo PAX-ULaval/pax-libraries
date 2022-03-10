@@ -65,7 +65,7 @@ def main():
         ],
         packages=packages,
         install_requires=[
-            "sklearn",
+            "scikit-learn",
             "torch",
             "poutyne",
             "numpy",
