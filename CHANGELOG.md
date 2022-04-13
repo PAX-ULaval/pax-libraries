@@ -13,3 +13,4 @@
 ## 0.1.7
 
 - add new data transformer
+- add weights init function
