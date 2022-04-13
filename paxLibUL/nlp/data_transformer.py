@@ -37,6 +37,15 @@ class NewLineStrip(Transformer):
         return [i.strip('\n') for i in x]
 
 
+class EmptyLineRemoval(Transformer):
+    """
+    A filter to remove empty lines in a list.
+    """
+
+    def transform(self, x):
+        return list(filter(None, x))
+
+
 class WhiteSpaceStrip(Transformer):
     """
     A filter to remove whitespace characters at the end of strings.
