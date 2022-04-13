@@ -1,4 +1,4 @@
-import functools
+from functools import partial
 
 import numpy as np
 import torch
@@ -193,7 +193,7 @@ class UNetSkipConnectionBlock(nn.Module):
         """
         super().__init__()
         self.outermost = outermost
-        if type(norm_layer) == functools.partial:
+        if type(norm_layer) == partial:
             use_bias = norm_layer.func == nn.InstanceNorm2d
         else:
             use_bias = norm_layer == nn.InstanceNorm2d

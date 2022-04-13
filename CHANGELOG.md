@@ -19,3 +19,7 @@
 ## 0.1.8
 
 - add UNetSkipConnectionBlock architecture
+
+## 0.1.9
+
+- bugfix partial
