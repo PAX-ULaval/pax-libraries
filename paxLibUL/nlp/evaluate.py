@@ -29,13 +29,15 @@ def evaluate_20newsgroups(pipeline, train, test):
     """
     Une fonction pour évaluer sur 20newsgroup
     """
-    return evaluate(pipeline, (train.data, train.target), (test.data, test.target),)
+    return evaluate(
+        pipeline,
+        (train.data, train.target),
+        (test.data, test.target),
+    )
 
 
 def evaluate_weccr(pipeline, train, test):
     """
     Une fonction pour évaluer sur WECCR
     """
-    return evaluate(
-        pipeline, (train["text"], train["label"]), (test["text"], test["label"])
-    )
+    return evaluate(pipeline, (train["text"], train["label"]), (test["text"], test["label"]))

@@ -14,3 +14,4 @@
 
 - add new data transformer
 - add weights init function
+- bugfix linting and some classes names

@@ -10,21 +10,19 @@ def visualiser_difference_de_poids(poids_initiaux, poids_finaux):
     """
     Affiche un graphique de la différence absolue moyenne entre les poids initiaux et finaux par couche.
     Args:
-        poids_initiaux (Dict[str, torch.Tensor] ): Un dictionnaire où les clés sont le nom de la couche et leur valeur sont les poids
-        poids_finaux (Dict[str, torch.Tensor] ): Un dictionnaire où les clés sont le nom de la couche et leur valeur sont les poids
+        poids_initiaux (Dict[str, torch.Tensor] ): Un dictionnaire où les clés sont le nom de
+        la couche et leur valeur sont les poids.
+        poids_finaux (Dict[str, torch.Tensor] ): Un dictionnaire où les clés sont le nom de
+        la couche et leur valeur sont les poids.
     """
 
-    difference_etat = dict()
+    difference_etat = {}
     nb_couches = len(poids_initiaux.keys())
 
-    for etat_initial_couche, etat_final_couche in zip(
-        poids_initiaux.items(), poids_finaux.items()
-    ):
+    for etat_initial_couche, etat_final_couche in zip(poids_initiaux.items(), poids_finaux.items()):
         difference_etat[etat_initial_couche[0]] = torch.abs(
             torch.flatten(
-                (etat_final_couche[1].cpu() - etat_initial_couche[1].cpu())
-                .detach()
-                .clone(),
+                (etat_final_couche[1].cpu() - etat_initial_couche[1].cpu()).detach().clone(),
                 0,
             )
         ).tolist()
@@ -36,7 +34,8 @@ def visualiser_difference_de_poids(poids_initiaux, poids_finaux):
 
     sns.lineplot(couche, moyenne)  # ,ax=ax2)
     plt.title(
-        f"Valeur moyenne de la différence absolue des poids initiaux et finaux par couche dans une architecture de {nb_couches} couches"
+        f"Valeur moyenne de la différence absolue des poids initiaux et finaux par couche "
+        f"dans une architecture de {nb_couches} couches"
     )
     plt.xlabel("Indice de la couche")
     plt.ylabel("différence")
@@ -56,9 +55,9 @@ class SauvegarderPoids(Callback):
 
     def __init__(self):
         super().__init__()
-        self.liste_poids = list()
+        self.liste_poids = []
 
-    def on_epoch_begin(self, batch, logs):  ## À chaque début d'époque
+    def on_epoch_begin(self, epoch_number, logs):  ## À chaque début d'époque
         poids = tuple(self.model.network.parameters())[0][0].clone().detach().cpu()
         self.liste_poids.append(poids)
 
@@ -108,9 +107,7 @@ def show_2d_function(
         plt.scatter(*optimal.numpy(), s=200, marker="*", c="r")
 
 
-def show_2d_trajectory(
-    w_history, fct, min_val=-5, max_val=5, mesh_step=0.5, *, optimal=None, ax=None
-):
+def show_2d_trajectory(w_history, fct, min_val=-5, max_val=5, mesh_step=0.5, *, optimal=None, ax=None):
     """
     Trace le graphique de la trajectoire de descente en gradient en 2D.
     Args:
@@ -181,9 +178,7 @@ def plot_image_samples(dataset):
     NROWS = 3
     NCOLS = 5
 
-    assert (
-        len(indices) <= NROWS * NCOLS
-    ), f"Impossible d'afficher plus de {NROWS * NCOLS} images."
+    assert len(indices) <= NROWS * NCOLS, f"Impossible d'afficher plus de {NROWS * NCOLS} images."
 
     samples = [dataset[i] for i in indices]
     images, targets = zip(*samples)
@@ -233,9 +228,7 @@ def visualiser_convolution(reseau, donnee, nb_image_max_par_couche):
                     except IndexError:
                         axes[feature % 4].imshow(image_conv)
                 plt.show()
-            if isinstance(layer, torch.nn.modules.pooling.MaxPool2d) or isinstance(
-                layer, torch.nn.modules.pooling.AvgPool2d
-            ):
+            if isinstance(layer, (torch.nn.modules.pooling.MaxPool2d, torch.nn.modules.pooling.AvgPool2d)):
                 pool += 1
                 print(f"Pooling {pool}")
                 _, axes = plt.subplots(

@@ -1,10 +1,7 @@
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
-"""
-Default architecture use for the formations.
-"""
 
 
 class ClassicNet(nn.Module):
@@ -32,15 +29,12 @@ class ClassicNet(nn.Module):
 
     def eval_weight_distribution(self, x):
         k = 2000  # Chiffre de valeurs aléatoires
-        entree = dict()
+        entree = {}
         indice = 0
         for layer in self.model:
             if isinstance(layer, torch.nn.modules.conv.Conv2d):
                 indice += 1
-                if (
-                        indice == 1 or indice == self.num_layers - 1
-                ):  # Première ou dernière couche
-
+                if indice in (1, self.num_layers - 1):  # Première ou dernière couche
                     echantillon = nn.Flatten(0)(x.detach().cpu())
                     entree[f"Conv_{indice}"] = np.random.choice(echantillon, size=k)
 
@@ -72,9 +66,7 @@ class ResNet(nn.Module):
         self.conv1 = nn.Conv2d(3, 100, 3, padding=1)
         self.bn1 = nn.BatchNorm2d(100)
 
-        self.layers = nn.ModuleList(
-            [ResidualLayer() for _ in range(nb_bloc_residuelle)]
-        )
+        self.layers = nn.ModuleList([ResidualLayer() for _ in range(nb_bloc_residuelle)])
 
         self.fc1 = nn.Linear(100 * 8 * 8, 10)
 

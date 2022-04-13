@@ -1,93 +1,9 @@
-import numpy as np
-import torch
-import matplotlib.pyplot as plt
-import math
-from torch.utils.data import Dataset
-import pandas as pd
 import pickle as pk
 
-
-class classification_jeu_donnee:
-    def __init__(self, taille_echantillon=100, bruit_bleu=0.3, bruit_rouge=0.5):
-
-        (
-            self.data,
-            self.x_bleu,
-            self.y_bleu,
-            self.x_rouge,
-            self.y_rouge,
-        ) = self._generate_dataset(taille_echantillon, bruit_bleu, bruit_rouge)
-
-    def _generate_dataset(self, taille_echantillon, bruit_bleu, bruit_rouge):
-        x = np.random.rand(taille_echantillon) * 10 - 5
-        y = np.random.rand(taille_echantillon) * 30
-        borne_linaire = np.linspace(-2.3166, 3, 100)
-        borne_quadratique_positive = np.linspace(-(12.5 ** 0.5), -2.3166, 100)
-        borne_quadratique_negative = np.linspace(-(12.5 ** 0.5), 3, 100)
-        x_bleu = list()
-        y_bleu = list()
-        x_rouge = list()
-        y_rouge = list()
-
-        for i, j in zip(x, y):
-            if (
-                    (j > i ** 2) and (j < -(i ** 2) + 25) and (j > i * 2 + 10)
-            ):  # or random.random() <= 0.02) :
-                x_rouge = np.append(x_rouge, i)
-                y_rouge = np.append(y_rouge, j)
-            else:
-
-                x_bleu = np.append(x_bleu, i)
-                y_bleu = np.append(y_bleu, j)
-
-        x_bleu = x_bleu + (np.random.randn(len(x_bleu)) * bruit_bleu)
-        y_bleu = y_bleu + (np.random.randn(len(y_bleu)) * bruit_bleu)
-        x_rouge = x_rouge + (np.random.randn(len(x_rouge)) * bruit_rouge)
-        y_rouge = y_rouge + (np.random.randn(len(y_rouge)) * bruit_rouge)
-        data_classification_plan = list()
-        for i, j in zip(x_bleu, y_bleu):
-            data_classification_plan.append(
-                (
-                    torch.Tensor(
-                        [i, j, i ** 2, j ** 2, i * j, math.sin(i), math.sin(j)]
-                    ),
-                    0,
-                )
-            )
-
-        for i, j in zip(x_rouge, y_rouge):
-            data_classification_plan.append(
-                (
-                    torch.Tensor(
-                        [i, j, i ** 2, j ** 2, i * j, math.sin(i), math.sin(j)]
-                    ),
-                    1,
-                )
-            )
-
-        return data_classification_plan, x_bleu, y_bleu, x_rouge, y_rouge
-
-    def visualisation(self):
-        borne_linaire = np.linspace(-2.3166, 3, 100)
-        borne_quadratique_positive = np.linspace(-(12.5 ** 0.5), -2.3166, 100)
-        borne_quadratique_negative = np.linspace(-(12.5 ** 0.5), 3, 100)
-        plt.scatter(self.x_bleu, self.y_bleu, s=3)
-        plt.scatter(self.x_rouge, self.y_rouge, marker="D", s=3)
-
-        plt.plot(borne_quadratique_positive, borne_quadratique_positive ** 2, c="r")
-        plt.plot(
-            borne_quadratique_negative, -(borne_quadratique_negative ** 2) + 25, c="r"
-        )
-        plt.plot(borne_linaire, 2 * borne_linaire + 10, c="r")
-        plt.xlim(-5, 5)
-        plt.ylim(0, 30)
-        plt.show()
-
-    def __getitem__(self, idx):
-        return self.data_classification_plan[idx]
-
-    def __len__(self):
-        return len(self.data_classification_plan)
+import numpy as np
+import pandas as pd
+import torch
+from torch.utils.data import Dataset
 
 
 class FaceDataset(Dataset):
@@ -104,9 +20,7 @@ class FaceDataset(Dataset):
         self.data["pixels"] = self.data["pixels"].apply(
             lambda x: np.array(x.split(), dtype="float32").reshape((1, 48, 48)) / 255
         )
-        self.data["age"] = self.data["age"].apply(
-            lambda x: np.array([x], dtype="float32")
-        )
+        self.data["age"] = self.data["age"].apply(lambda x: np.array([x], dtype="float32"))
         self.X = torch.Tensor(self.data["pixels"])
 
         self.transform = transform
@@ -119,9 +33,7 @@ class FaceDataset(Dataset):
             indice = indice.tolist()
         image = self.X[indice]
         if len(self.columns) > 1:
-            attribute = torch.Tensor(
-                [float(self.data.iloc[indice][i]) for i in self.columns]
-            )
+            attribute = torch.Tensor([float(self.data.iloc[indice][i]) for i in self.columns])
         else:
             attribute = self.data.iloc[indice][self.columns[0]]
         sample = (image, attribute)
@@ -146,13 +58,9 @@ class EchantillonCIFAR10(Dataset):
     def __init__(self, root_dir, train=True, transform=None):
 
         if train:
-            self.echantillon = pk.load(
-                open(f"{root_dir}CIFAR10_train_10000_sample.pk", "rb")
-            )
+            self.echantillon = pk.load(open(f"{root_dir}CIFAR10_train_10000_sample.pk", "rb"))
         else:
-            self.echantillon = pk.load(
-                open(f"{root_dir}CIFAR10_test_2000_sample.pk", "rb")
-            )
+            self.echantillon = pk.load(open(f"{root_dir}CIFAR10_test_2000_sample.pk", "rb"))
 
         self.root_dir = root_dir
         self.transform = transform
