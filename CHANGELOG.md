@@ -23,3 +23,8 @@
 ## 0.1.9
 
 - bugfix partial
+
+## 0.1.10
+
+- fix isinstance
+- fix class Echantillon for new Path approach

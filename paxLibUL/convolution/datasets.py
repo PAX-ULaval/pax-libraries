@@ -3,6 +3,7 @@ import pickle as pk
 import numpy as np
 import pandas as pd
 import torch
+from paxutils.path import Path
 from torch.utils.data import Dataset
 
 
@@ -49,20 +50,19 @@ class EchantillonCIFAR10(Dataset):
         Échantillon du jeu de donnée CIFAR10. L'échantillon comprend 10 000 données d'entraînements
         et 2 000 de tests.
     Args:
-        root_dir (string): Chemin vers le fichier pickle contenant l'échantillon
         train (bool): Si True, prend les données d'entraînements, sinon les données de tests
-        transforms (callable, optional): Une function/transform qui prend le target et le transforme.
+        transform (callable, optional): Une function/transform qui prend le target et le transforme.
 
     """
 
-    def __init__(self, root_dir, train=True, transform=None):
-
+    def __init__(self, train=True, transform=None):
+        train_data_path = Path('CIFAR10_train_10000_sample.pk', course='gif-u020')
+        test_data_path = Path('CIFAR10_test_2000_sample.pk', course='gif-u020')
         if train:
-            self.echantillon = pk.load(open(f"{root_dir}CIFAR10_train_10000_sample.pk", "rb"))
+            self.echantillon = pk.load(open(train_data_path, "rb"))
         else:
-            self.echantillon = pk.load(open(f"{root_dir}CIFAR10_test_2000_sample.pk", "rb"))
+            self.echantillon = pk.load(open(test_data_path, "rb"))
 
-        self.root_dir = root_dir
         self.transform = transform
         self.classes = [
             "avion",

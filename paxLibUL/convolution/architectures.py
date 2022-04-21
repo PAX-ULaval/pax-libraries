@@ -193,7 +193,7 @@ class UNetSkipConnectionBlock(nn.Module):
         """
         super().__init__()
         self.outermost = outermost
-        if type(norm_layer) == partial:
+        if isinstance(norm_layer, partial):
             use_bias = norm_layer.func == nn.InstanceNorm2d
         else:
             use_bias = norm_layer == nn.InstanceNorm2d
