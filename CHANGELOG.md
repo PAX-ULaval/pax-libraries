@@ -28,3 +28,7 @@
 
 - fix isinstance
 - fix class Echantillon for new Path approach
+
+## 0.1.11
+
+- Add NLP datasets
