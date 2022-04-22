@@ -102,5 +102,3 @@ class LowerCaser(Transformer):
 
     def transform(self, x):
         return [i.lower() for i in x]
-
-
