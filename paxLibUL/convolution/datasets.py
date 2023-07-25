@@ -55,9 +55,9 @@ class EchantillonCIFAR10(Dataset):
 
     """
 
-    def __init__(self, train=True, transform=None):
-        train_data_path = Path('CIFAR10_train_10000_sample.pk', course='gif-u020')
-        test_data_path = Path('CIFAR10_test_2000_sample.pk', course='gif-u020')
+    def __init__(self, train=True, transform=None, course='gif-u019'):
+        train_data_path = Path('CIFAR10_train_10000_sample.pk', course=course)
+        test_data_path = Path('CIFAR10_test_2000_sample.pk', course=course)
         if train:
             self.echantillon = pk.load(open(train_data_path, "rb"))
         else:
