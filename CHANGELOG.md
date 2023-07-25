@@ -32,3 +32,7 @@
 ## 0.1.11
 
 - Add NLP datasets
+
+## 0.1.12
+
+- Added course argument to EchantillonCIFAR10 class
