@@ -50,8 +50,9 @@ class EchantillonCIFAR10(Dataset):
         Échantillon du jeu de donnée CIFAR10. L'échantillon comprend 10 000 données d'entraînements
         et 2 000 de tests.
     Args:
-        train (bool): Si True, prend les données d'entraînements, sinon les données de tests
+        train (bool): Si True, prend les données d'entraînements, sinon les données de tests.
         transform (callable, optional): Une function/transform qui prend le target et le transforme.
+        course (str, optional): Le sigle de la formation.
 
     """
 
