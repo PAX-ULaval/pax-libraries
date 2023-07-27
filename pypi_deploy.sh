@@ -6,5 +6,6 @@ if [ $current_branch != "stable" ]; then
     exit 1
 fi
 
-PAX_LIBRARIES_RELEASE_BUILD=1 python setup.py sdist bdist_wheel
+PAX_LIBRARIES_RELEASE_BUILD=1
+python setup.py sdist bdist_wheel
 python -m twine upload dist/*

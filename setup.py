@@ -22,10 +22,10 @@ def get_version():
     except Exception:  # pylint: disable=broad-except
         sha = "Unknown"
 
-    if os.getenv("PAX_LIBRARIES_RELEASE_BUILD") != "1":
-        version += ".dev1"
-        if sha != "Unknown":
-            version += "+" + sha[:7]
+    # if os.getenv("PAX_LIBRARIES_RELEASE_BUILD") != "1":
+    #     version += ".dev1"
+    #     if sha != "Unknown":
+    #         version += "+" + sha[:7]
     return version
 
 
