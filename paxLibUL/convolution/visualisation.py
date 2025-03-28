@@ -32,7 +32,7 @@ def visualiser_difference_de_poids(poids_initiaux, poids_finaux):
 
     max_moyenne = np.max(moyenne)
 
-    sns.lineplot(couche, moyenne)  # ,ax=ax2)
+    sns.lineplot(x=couche, y=moyenne)
     plt.title(
         f"Valeur moyenne de la différence absolue des poids initiaux et finaux par couche "
         f"dans une architecture de {nb_couches} couches"
