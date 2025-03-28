@@ -1,5 +1,28 @@
-[tool.black]
-line-length = 120
-skip-string-normalization = true
-required-version = '22.3.0'
-extend-exclude = '/(slides)/'
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "paxLibUL"
+version = "0.2.0"
+description = "A library for internal formation tools use in PaX ULaval formations."
+readme = "README.md"
+authors = [
+    {name = "David Beauchemin", email = "david.beauchemin@ift.ulaval.ca"},
+    {name = "Marc Parizeau", email = "marc.parizeau@gel.ulaval.ca"},
+]
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">= 3.8"
+dependencies = [
+    "scikit-learn",
+    "torch",
+    "poutyne",
+    "numpy",
+    "matplotlib",
+    "pandas",
+    "seaborn",
+]
+
+[project.urls]
+Homepage = "https://github.com/PAX-ULaval/pax-libraries"

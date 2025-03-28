@@ -1,14 +1,28 @@
-## 0.1
+## 0.2.0 (March 28th, 2025)
 
-- initial version
+- Fixed seaborn x, y warning issue.
+- Package build refactoring.
 
-## 0.1.5
+## 0.1.12
 
-- add data transformers
+- Added course argument to EchantillonCIFAR10 class
 
-## 0.1.6
+## 0.1.11
 
-- fix convolution lib import error
+- Add NLP datasets
+
+## 0.1.10
+
+- fix isinstance
+- fix class Echantillon for new Path approach
+
+## 0.1.9
+
+- bugfix partial
+
+## 0.1.8
+
+- add UNetSkipConnectionBlock architecture
 
 ## 0.1.7
 
@@ -16,27 +30,14 @@
 - add weights init function
 - bugfix linting and some classes names
 
-## 0.1.8
+## 0.1.6
 
-- add UNetSkipConnectionBlock architecture
+- fix convolution lib import error
 
-## 0.1.9
+## 0.1.5
 
-- bugfix partial
+- add data transformers
 
-## 0.1.10
+## 0.1
 
-- fix isinstance
-- fix class Echantillon for new Path approach
-
-## 0.1.11
-
-- Add NLP datasets
-
-## 0.1.12
-
-- Added course argument to EchantillonCIFAR10 class
-
-## 0.1.13 (March 28th, 2025)
-
-- Fixed seaborn x, y warning issue.
+- initial version
