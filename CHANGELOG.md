@@ -36,3 +36,7 @@
 ## 0.1.12
 
 - Added course argument to EchantillonCIFAR10 class
+
+## 0.1.13 (March 28th, 2025)
+
+- Fixed seaborn x, y warning issue.
