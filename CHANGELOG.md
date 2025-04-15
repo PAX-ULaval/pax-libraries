@@ -1,3 +1,7 @@
+## 0.2.1 (April 15th, 2025)
+
+- added indexing argument to meshgrid method.
+
 ## 0.2.0 (March 28th, 2025)
 
 - Fixed seaborn x, y warning issue.

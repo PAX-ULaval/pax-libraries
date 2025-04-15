@@ -84,7 +84,7 @@ def show_2d_function(
     w1_values = torch.arange(min_val, max_val + mesh_step, mesh_step)
     w2_values = torch.arange(min_val, max_val + mesh_step, mesh_step)
 
-    w2, w1 = torch.meshgrid(w2_values, w1_values)
+    w2, w1 = torch.meshgrid(w2_values, w1_values, indexing='ij')
     w_grid = torch.stack((w1.flatten(), w2.flatten()))
     fct_values = fct(w_grid).view(w1_values.shape[0], w2.shape[0]).numpy()
 
